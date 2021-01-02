@@ -3728,6 +3728,11 @@ let
     packageName = "CyTube";
     version = "3.74.1";
     src = ../sync;
+    # src = fetchgit {
+    #   url = "https://github.com/calzoneman/sync.git";
+    #   rev = "9e3c23c58a142780d30babab1f27936e9f1d6d33";
+    #   sha256 = "0qcbavzm3h6rl7yf0qym9lmj6zz86vp0jj6b8zsizx6ah6q4b4mk";
+    # };
     dependencies = [
       sources."@calzoneman/express-babel-decorators-1.0.0"
       sources."@calzoneman/jsli-2.0.1"
