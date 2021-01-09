@@ -1,0 +1,3 @@
+[submodule "sync"]
+	path = sync
+	url = https://github.com/towards-a-new-leftypol/sync.git
