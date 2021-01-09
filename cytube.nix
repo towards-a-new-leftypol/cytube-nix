@@ -6,7 +6,7 @@ let
   cfg = config.services.cytube;
   dirWithEverything = "/var/lib/cytube";
 
-  # MariaDB [lainchan]> ALTER USER cytube@localhost IDENTIFIED BY "shinywaterturbojetpenis";
+  # MariaDB [lainchan]> ALTER USER cytube@localhost IDENTIFIED BY "yourpasswordhere";
   cytubeConfig = ''
     mysql:
       server: "${cfg.database.server}"
