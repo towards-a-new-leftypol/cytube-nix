@@ -6,31 +6,30 @@ let
   cfg = config.services.cytube;
   dirWithEverything = "/var/lib/cytube";
 
+  # MariaDB [lainchan]> ALTER USER cytube@localhost IDENTIFIED BY "shinywaterturbojetpenis";
   cytubeConfig = ''
     mysql:
-      server: "localhost"
-      port: 3306
-      database: "cytube3"
-      user: "cytube3"
-      password: ""
+      server: "${cfg.database.server}"
+      port: ${builtins.toString cfg.database.port}
+      database: "${cfg.database.name}"
+      user: "${cfg.database.user}"
+      password: "${cfg.database.password}"
       pool-size: 2
     listen:
       - ip: ""
-        port: 8081
+        port: ${builtins.toString cfg.httpPort}
         http: true
-      - ip: ""
-        port: 8082
         io: true
     http:
-      default-port: 8081
-      root-domain: "localhost"
+      default-port: ${builtins.toString cfg.publicPort}
+      root-domain: "${cfg.cookie-domain}"
       alt-domains:
         - "127.0.0.1"
       minify: false
       max-age: "7d"
-      gzip: true
+      gzip: false
       gzip-threshold: 1024
-      cookie-secret: "change-me"
+      cookie-secret: "${cfg.cookie-secret}"
       index:
         max-entries: 50
       trust-proxies: [ "loopback" ]
@@ -43,11 +42,11 @@ let
       description: "Free, open source synchtube"
 
     io:
-      domain: "http://localhost"
-      default-port: 8082
+      domain: "http://${cfg.cookie-domain}:${builtins.toString cfg.publicPort}"
+      default-port: ${builtins.toString cfg.publicPort}
       ip-connection-limit: 50
 
-    youtube-v3-key: ""
+    youtube-v3-key: "${cfg.youtube-v3-key}"
     max-channels-per-user: 5
     max-accounts-per-ip: 5
     guest-login-delay: 60
@@ -103,7 +102,7 @@ let
     # server-synched raw file playback.  This requires the following:
     #   * ffmpeg must be installed on the server
     ffmpeg:
-      enabled: false
+      enabled: true
     # Executable name for ffprobe if it is not "ffprobe".  On Debian and Ubuntu (on which
     # libav is used rather than ffmpeg proper), this is "avprobe"
       ffprobe-exec: "ffprobe"
@@ -156,6 +155,66 @@ with lib;
         default = "cytube";
         description = "Group the cytube server will run as";
       };
+
+      httpPort = mkOption {
+        type = types.int;
+        default = 8080;
+        description = "http serve port";
+      };
+
+      publicPort = mkOption {
+        type = types.int;
+        default = 80;
+        description = "http port for generating links";
+      };
+
+      youtube-v3-key = mkOption {
+        type = types.str;
+        default = "";
+        description = "See https://github.com/calzoneman/sync/blob/3.0/config.template.yaml#L111";
+      };
+
+      cookie-secret = mkOption {
+        type = types.str;
+        description = "Secret for session cookies";
+      };
+
+      cookie-domain = mkOption {
+        type = types.str;
+        default = "localhost";
+        description = "Root domain for cookies. eg. example.com";
+      };
+
+      database = {
+        server = mkOption {
+          type = types.str;
+          default = "localhost";
+          description = "hostname or ip address of the database";
+        };
+
+        port = mkOption {
+          type = types.int;
+          default = 3306;
+          description = "database port";
+        };
+
+        name = mkOption {
+          type = types.str;
+          default = "cytube";
+          description = "Name of the database to use.";
+        };
+
+        user = mkOption {
+          type = types.str;
+          default = "cytube";
+          description = "User to connect to the database as.";
+        };
+
+        password = mkOption {
+          type = types.str;
+          description = "Password for the database user";
+        };
+      };
     };
   };
 
@@ -180,12 +239,14 @@ with lib;
         CYTUBE_WEB_CACHE_DIR = "${dirWithEverything}/cache/";
         CYTUBE_CHANLOGS_DIR = "${dirWithEverything}/chanlogs/";
         CYTUBE_FFMPEGLOG_LOCATION = "${dirWithEverything}/ffmpeg.log";
+        CYTUBE_GOOGLE_DRIVE_SUBTITLES_DIR = "${dirWithEverything}/google_subtitles/";
       };
 
       serviceConfig = {
         Type = "simple";
         User = cfg.user;
         Group = cfg.group;
+        WorkingDirectory = dirWithEverything;
         #Restart = "on-failure";
         ExecStart = "${pkgs.nodejs}/bin/node ${cytubePkg}/lib/node_modules/CyTube/index.js";
         KillSignal = "SIGQUIT";
@@ -196,6 +257,7 @@ with lib;
       "d '${dirWithEverything}' 0750 ${cfg.user} ${cfg.group}"
       "d '${dirWithEverything}/cache' 0750 ${cfg.user} ${cfg.group}"
       "d '${dirWithEverything}/chanlogs' 0750 ${cfg.user} ${cfg.group}"
+      "d '${dirWithEverything}/google_subtitles' 0750 ${cfg.user} ${cfg.group}"
     ];
 
     users.groups = {
