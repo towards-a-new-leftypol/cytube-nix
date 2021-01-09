@@ -44,7 +44,7 @@ let
     io:
       domain: "http://${cfg.cookie-domain}:${builtins.toString cfg.publicPort}"
       default-port: ${builtins.toString cfg.publicPort}
-      ip-connection-limit: 50
+      ip-connection-limit: ${builtins.toString cfg.concurrentUsers}
 
     youtube-v3-key: "${cfg.youtube-v3-key}"
     max-channels-per-user: 5
@@ -166,6 +166,12 @@ with lib;
         type = types.int;
         default = 80;
         description = "http port for generating links";
+      };
+
+      concurrentUsers = mkOption {
+        type = types.int;
+        default = 50;
+        description = "Maximum allowed websocket connections";
       };
 
       youtube-v3-key = mkOption {
