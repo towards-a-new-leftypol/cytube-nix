@@ -42,7 +42,7 @@ let
       description: "Free, open source synchtube"
 
     io:
-      domain: "http://${cfg.cookie-domain}:${builtins.toString cfg.publicPort}"
+      domain: "https://${cfg.cookie-domain}:${builtins.toString cfg.publicPort}"
       default-port: ${builtins.toString cfg.publicPort}
       ip-connection-limit: ${builtins.toString cfg.concurrentUsers}
 
