@@ -272,6 +272,7 @@ with lib;
 
     users.extraUsers.${cfg.user} = {
       group = cfg.group;
+      isSystemUser = true;
     };
 
   };
