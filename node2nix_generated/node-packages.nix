@@ -3,6 +3,7 @@
 {nodeEnv, fetchurl, fetchgit, nix-gitignore, stdenv, lib, globalBuildInputs ? []}:
 
 let
+  buildNodePackage = nodeEnv.buildNodePackage;
   sources = {
     "@babel/helper-string-parser-7.22.5" = {
       name = "_at_babel_slash_helper-string-parser";
@@ -50,13 +51,13 @@ let
       };
     };
     "@cytube/mediaquery-git+https://github.com/cytube/mediaquery#564d0c4615e80f72722b0f68ac81f837a4c5fc81" = {
-      name = "cytube-mediaquery";
-      packageName = "cytube-mediaquery";
+      name = "_at_cytube_slash_mediaquery";
+      packageName = "@cytube/mediaquery";
       version = "0.3.0";
       src = fetchgit {
         url = "https://github.com/cytube/mediaquery";
         rev = "564d0c4615e80f72722b0f68ac81f837a4c5fc81";
-        sha256 = "8adb31ecc90450a915f9459c45cf790cf2e42f80e1c7fb1fee53ac030663cae8";
+        sha256 = "sha256-itsx7MkEUKkV+UWcRc95DPLkL4Dhx/sf7lOsAwZjyug=";
       };
     };
     "@mapbox/node-pre-gyp-1.0.11" = {
@@ -2432,7 +2433,12 @@ let
     name = "CyTube";
     packageName = "CyTube";
     version = "3.86.0";
-    src = ../sync;
+    #src = ../sync;
+    src = fetchgit {
+      url = "https://github.com/towards-a-new-leftypol/sync.git";
+      rev = "7a1b783a2ec214aeabe9d1171d44f52a09f104f5";
+      sha256 = "sha256-ajn7ORg2SEx96arW82wpB0ToIYYlz7xQqXF5FQPeBF4=";
+    };
     dependencies = [
       sources."@babel/helper-string-parser-7.22.5"
       sources."@babel/helper-validator-identifier-7.22.20"

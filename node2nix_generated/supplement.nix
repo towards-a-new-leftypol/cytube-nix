@@ -1012,13 +1012,13 @@ let
         sha512 = "+wvgpDsrB1YqAMdEUCcnTlpfVBH7Vqn6A/NT3D8WVXFIaKMlErPIZT3oCIAVCOtarRpMtelZLqJeU3t7WY6X6g==";
       };
     };
-    "@eslint/js-8.49.0" = {
+    "@eslint/js-8.50.0" = {
       name = "_at_eslint_slash_js";
       packageName = "@eslint/js";
-      version = "8.49.0";
+      version = "8.50.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/@eslint/js/-/js-8.49.0.tgz";
-        sha512 = "1S8uAY/MTJqVx0SC4epBq+N2yhuwtNwLbJYNZyhL2pO1ZVKn5HFXav5T41Ryzy9K9V7ZId2JB2oy/W4aCd9/2w==";
+        url = "https://registry.npmjs.org/@eslint/js/-/js-8.50.0.tgz";
+        sha512 = "NCC3zz2+nvYd+Ckfh87rA47zfu2QsQpvc6k1yzTk+b9KzRj0wkGa8LSoGOXN6Zv4lRf/EIoZ80biDh9HOI+RNQ==";
       };
     };
     "@humanwhocodes/config-array-0.11.11" = {
@@ -1597,13 +1597,13 @@ let
         sha512 = "yS+Q5i3hBf7GBkd4KG8a7eBNNWNGLTaEwwYWUijIYM7zrlYDM0BFXHjjPWlWZ1Rg7UaddZeIDmi9jF3HmqiQ2w==";
       };
     };
-    "electron-to-chromium-1.4.527" = {
+    "electron-to-chromium-1.4.528" = {
       name = "electron-to-chromium";
       packageName = "electron-to-chromium";
-      version = "1.4.527";
+      version = "1.4.528";
       src = fetchurl {
-        url = "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.527.tgz";
-        sha512 = "EafxEiEDzk2aLrdbtVczylHflHdHkNrpGNHIgDyA63sUQLQVS2ayj2hPw3RsVB42qkwURH+T2OxV7kGPUuYszA==";
+        url = "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.4.528.tgz";
+        sha512 = "UdREXMXzLkREF4jA8t89FQjA8WHI6ssP38PMY4/4KhXFQbtImnghh4GkCgrtiZwLKUKVD2iTVXvDVQjfomEQuA==";
       };
     };
     "emoji-regex-8.0.0" = {
@@ -1651,13 +1651,13 @@ let
         sha512 = "TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==";
       };
     };
-    "eslint-8.49.0" = {
+    "eslint-8.50.0" = {
       name = "eslint";
       packageName = "eslint";
-      version = "8.49.0";
+      version = "8.50.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/eslint/-/eslint-8.49.0.tgz";
-        sha512 = "jw03ENfm6VJI0jA9U+8H5zfl5b+FvuU3YYvZRdZHOlU2ggJkxrlkJH4HcDrZpj6YwD8kuYqvQM8LyesoazrSOQ==";
+        url = "https://registry.npmjs.org/eslint/-/eslint-8.50.0.tgz";
+        sha512 = "FOnOGSuFuFLv/Sa+FDVRZl4GGVAAFFi8LecRsI5a1tMO5HIE8nCm4ivAlzt4dT3ol/PaaGC0rJEEXQmHJBGoOg==";
       };
     };
     "eslint-scope-5.1.1" = {
@@ -3249,7 +3249,7 @@ in
       sources."concat-map-0.0.1"
       sources."convert-source-map-1.9.0"
       sources."debug-4.3.4"
-      sources."electron-to-chromium-1.4.527"
+      sources."electron-to-chromium-1.4.528"
       sources."escalade-3.1.1"
       sources."escape-string-regexp-1.0.5"
       sources."fs-readdir-recursive-1.1.0"
@@ -3334,7 +3334,7 @@ in
       sources."color-name-1.1.3"
       sources."convert-source-map-1.9.0"
       sources."debug-4.3.4"
-      sources."electron-to-chromium-1.4.527"
+      sources."electron-to-chromium-1.4.528"
       sources."escalade-3.1.1"
       sources."escape-string-regexp-1.0.5"
       sources."gensync-1.0.0-beta.2"
@@ -3499,7 +3499,7 @@ in
       sources."convert-source-map-1.9.0"
       sources."core-js-compat-3.32.2"
       sources."debug-4.3.4"
-      sources."electron-to-chromium-1.4.527"
+      sources."electron-to-chromium-1.4.528"
       sources."escalade-3.1.1"
       sources."escape-string-regexp-1.0.5"
       sources."esutils-2.0.3"
@@ -3580,7 +3580,7 @@ in
           sources."globals-13.22.0"
         ];
       })
-      sources."@eslint/js-8.49.0"
+      sources."@eslint/js-8.50.0"
       sources."@humanwhocodes/config-array-0.11.11"
       sources."@humanwhocodes/module-importer-1.0.1"
       sources."@humanwhocodes/object-schema-1.2.1"
@@ -3610,7 +3610,7 @@ in
       sources."deep-is-0.1.4"
       sources."doctrine-3.0.0"
       sources."escape-string-regexp-1.0.5"
-      (sources."eslint-8.49.0" // {
+      (sources."eslint-8.50.0" // {
         dependencies = [
           sources."ansi-styles-4.3.0"
           sources."chalk-4.1.2"
