@@ -16,6 +16,7 @@ let
   };
 in
 import ./node-packages.nix {
+  inherit (pkgs) fetchFromGitHub;
   inherit (pkgs) fetchurl nix-gitignore stdenv lib fetchgit;
   inherit nodeEnv globalBuildInputs;
 }
