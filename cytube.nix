@@ -2,6 +2,7 @@
 
 let
   cytubePkg = (import ./override.nix { inherit pkgs system; }).package;
+  nodePkg = pkgs.nodejs_18;
 
   cfg = config.services.cytube;
   dirWithEverything = "/var/lib/cytube";
@@ -42,7 +43,7 @@ let
       description: "Free, open source synchtube"
 
     io:
-      domain: "https://${cfg.cookie-domain}:${builtins.toString cfg.publicPort}"
+      domain: "https://${cfg.cookie-domain}"
       default-port: ${builtins.toString cfg.publicPort}
       ip-connection-limit: ${builtins.toString cfg.concurrentUsers}
 
@@ -226,7 +227,7 @@ with lib;
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.nodejs
+      nodePkg
       cytubePkg
       pkgs.ffmpeg
     ];
@@ -254,7 +255,7 @@ with lib;
         Group = cfg.group;
         WorkingDirectory = dirWithEverything;
         #Restart = "on-failure";
-        ExecStart = "${pkgs.nodejs}/bin/node ${cytubePkg}/lib/node_modules/CyTube/index.js";
+        ExecStart = "${nodePkg}/bin/node ${cytubePkg}/lib/node_modules/CyTube/index.js";
         KillSignal = "SIGQUIT";
       };
     };
