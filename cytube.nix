@@ -1,8 +1,8 @@
 { config, pkgs, lib, system, ... }:
 
 let
-  cytubePkg = (import ./override.nix { inherit pkgs system; }).package;
-  nodePkg = pkgs.nodejs_18;
+  nodePkg = pkgs.nodejs_20;
+  cytubePkg = (import ./override.nix { inherit pkgs system; nodejs = nodePkg; }).package;
 
   cfg = config.services.cytube;
   dirWithEverything = "/var/lib/cytube";
