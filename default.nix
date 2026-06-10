@@ -3,7 +3,7 @@
 }:
 
 let
-  nodejs = pkgs.nodejs;
+  nodejs = pkgs.nodejs_22;
 in
 pkgs.buildNpmPackage rec {
   pname = "cytube";
@@ -15,11 +15,11 @@ pkgs.buildNpmPackage rec {
   src = pkgs.fetchFromGitHub {
     owner = "towards-a-new-leftypol";
     repo = "sync";
-    rev = "74dbdf0e50ce48bcff7869e813a943d9d5103e4c";
-    hash = "sha256-rw0pOHuPcDLelL9fRu3Mxt52rtFEWATX2Y0czEqWS/M=";
+    rev = "1cf2fb319ff96cf814cf55e24dfdc75e937857eb";
+    hash = "sha256-p1j4mXJrvwQG552FJ5gZsdH7JM0NzUw+SyO+Ns+WGbQ=";
   };
 
-  npmDepsHash = "sha256-pDHzcuYYiPID7qMUwsuoPH2FST3+OAePnx/uUDYrlBc=";
+  npmDepsHash = "sha256-VEZety29v/R5ueMScXhnNed8wsoVDjklWUSCYCkUk4M=";
 
   inherit nodejs;
 
