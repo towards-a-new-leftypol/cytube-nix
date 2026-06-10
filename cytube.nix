@@ -1,8 +1,7 @@
 { config, pkgs, lib, system, ... }:
 
 let
-  nodePkg = pkgs.nodejs_20;
-  cytubePkg = (import ./override.nix { inherit pkgs system; nodejs = nodePkg; }).package;
+  cytubePkg = (import ./default.nix { inherit pkgs lib; });
 
   cfg = config.services.cytube;
   dirWithEverything = "/var/lib/cytube";
@@ -227,7 +226,6 @@ with lib;
 
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      nodePkg
       cytubePkg
       pkgs.ffmpeg
     ];
@@ -255,7 +253,7 @@ with lib;
         Group = cfg.group;
         WorkingDirectory = dirWithEverything;
         #Restart = "on-failure";
-        ExecStart = "${nodePkg}/bin/node ${cytubePkg}/lib/node_modules/CyTube/index.js";
+        ExecStart = "${cytubePkg}/bin/cytube";
         KillSignal = "SIGQUIT";
       };
     };
