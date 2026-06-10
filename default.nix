@@ -3,7 +3,7 @@
 }:
 
 let
-  nodejs = pkgs.nodejs_20;
+  nodejs = pkgs.nodejs;
 in
 pkgs.buildNpmPackage rec {
   pname = "cytube";
